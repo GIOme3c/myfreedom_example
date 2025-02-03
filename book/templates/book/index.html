@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <img src="https://avatars.mds.yandex.net/i?id=48790b5bba746b11778bad1034d5cd23_l-5334272-images-thumbs&n=13">
+
+    <h1>Список книг</h1>
+
+    <ul>
+        {% for book in books %}
+            <li>
+                {{ book.name }} <br/>
+                {{ book.description }} <br/>
+                {{ book.published }}
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
