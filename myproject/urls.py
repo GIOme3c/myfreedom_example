@@ -16,9 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
+# from django.contrib.auth import views as auth_views
+арр_name = "main"
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('books/', include('book.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/profile/', TemplateView.as_view(template_name="registration/profile.html")),
+    path('admin/', admin.site.urls, name="admin"),
+    path('books/', include('book.urls')),
+    path('authors/', include('author.urls')),
+    path('', TemplateView.as_view(template_name="main_page.html"))
 ]

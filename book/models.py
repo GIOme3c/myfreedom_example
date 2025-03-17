@@ -1,31 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from author.models import Authors
 
 class Profile(models.Model):
     is_active = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-
-class Authors(models.Model):
-    name = models.CharField(max_length=30)
-    surname = models.CharField(max_length=30)
-    patronymic = models.CharField(max_length=30, null=True, blank=True)
-    birthdate = models.DateTimeField()
-    deathdate = models.DateTimeField(null=True, blank=True)
-
-    bio = models.TextField(null=True, blank=True, verbose_name="Биография")
-
-    def __str__(self):
-        return self.fio
-
-    class Meta:
-        verbose_name_plural = "Авторы"
-        verbose_name = "Автор"
-
-    @property
-    def fio(self):
-        return self.name+" "+self.patronymic+" "+self.surname
 
 
 class Book(models.Model):
@@ -34,7 +13,7 @@ class Book(models.Model):
     price = models.FloatField(null=True, blank=True, default=100)
     published = models.DateTimeField(auto_now_add=True, db_index=True)
 
-    author = models.ForeignKey(Authors, on_delete=models.PROTECT, null=True, to_field="")
+    author = models.ForeignKey(Authors, on_delete=models.PROTECT, null=True, related_name="books")
 
     def __str__(self):
         return self.name+" "+str(self.price)
@@ -48,7 +27,7 @@ class Book(models.Model):
 
 class History(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
-    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING)
+    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, related_name="history")
     date_start = models.DateTimeField(auto_now_add=True)
     date_end = models.DateTimeField()
 
