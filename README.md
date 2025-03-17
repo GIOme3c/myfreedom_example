@@ -4,6 +4,6 @@
 ```sh
 pythonm -m venv venv
 source venv/bin/activate
-pip install -r req.txt
+pip install -r req.txtasdfasdf
 python manage.py runserver
 ```
