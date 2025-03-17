@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% for object in object_list %}
+    <a href="{% url 'author-detail' pk=object.id%}"><p>{{object.name}} {{object.surname}} {{object.patronymic}} {{object.birthdate}}</p></a>
+{% endfor %}
+
+
+{% endblock %}
